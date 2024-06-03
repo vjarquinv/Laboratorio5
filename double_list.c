@@ -12,20 +12,30 @@ struct Node {
 // Para utilizar solo Node el resto del codigo
 typedef struct Node Node;
 
-// Funcion para insertar nodo al inicio
-void insertBeginnig(int data, Node** cabeza){
+Node* crearNode(int data){
     // Reservar en memoria para el nuevo nodo
-    Node* newNode = (Node* )malloc(sizeof(Node));
-    // Revisa si malloc no fallo
-    if (newNode == NULL){
+    Node* newNode =(Node* )malloc(sizeof(Node));
+        // Revisa si malloc no fallo
+        if (newNode == NULL){
         printf("Fallo reservando memoria\n");
-        return;
+        return NULL;
     }
 
     newNode->data = data;
     // Como no existen se inicializan en NULL
     newNode->next = NULL;
     newNode->prev = NULL;
+
+    return newNode; 
+}
+
+// Funcion para insertar nodo al inicio
+void insertBeginnig(int data, Node** cabeza){
+
+    Node* newNode = crearNode(data);
+    if (newNode == NULL) {
+        return;
+    }
 
     // Si la lista esta vacia, el nuevo nodo sera la cabeza
     if (*cabeza != NULL) {
@@ -37,17 +47,11 @@ void insertBeginnig(int data, Node** cabeza){
 }
 
 void insertEnd(int data, Node** cabeza) {
-    // Reservar en memoria para el nuevo nodo
-    Node* newNode = (Node* )malloc(sizeof(Node));
-    // Revisa si malloc no fallo
+    
+    Node* newNode = crearNode(data);
     if (newNode == NULL) {
-        printf("Fallo reservando memoria\n");
         return;
     }
-
-    newNode->data = data;
-    newNode->next = NULL;      
-    newNode->prev = NULL;
 
     // Si la lista esta vacia, el nuevo nodo sera la cabeza
     if (*cabeza == NULL) {
