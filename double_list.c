@@ -1,17 +1,10 @@
 // Laboratorio 5 -- Listas -- Valeria Jarquin Vargas, B83986
 #include <stdio.h>
 #include <stdlib.h>
+#include "double_list.h"
 
-// Estructura 
-struct Node {
-    int data;
-    struct Node* next;
-    struct Node* prev;
-};
 
-// Para utilizar solo Node el resto del codigo
-typedef struct Node Node;
-
+// Funcion para crear nodo
 Node* crearNode(int data){
     // Reservar en memoria para el nuevo nodo
     Node* newNode =(Node* )malloc(sizeof(Node));
@@ -100,6 +93,7 @@ void insertPosition(int data, int position, Node** cabeza){
     temp->next = newNode;
 }
 
+// Funcion para eliminar un nodo
 void deleteNode(int data, Node** cabeza){
     Node* temp = *cabeza;
 
@@ -136,10 +130,12 @@ Node* searchNode(int  data, Node* cabeza){
 
     while (temp != NULL){
         if(temp->data == data){
+            printf("Nodo con valor %d encontrado.\n", data);
             return temp;
         }
         temp = temp->next;
     }
+    printf("Nodo con valor %d no encontrado.\n", data);
     return NULL;
 }
 
@@ -153,6 +149,7 @@ void printList(Node* head) {
     printf("\n");
 }
 
+// Funcion para recorrer lista hacia atras
 void printListBack(Node* head) {
     Node* temp = head;
 
@@ -178,50 +175,4 @@ void freeList(Node* head){
         actual = next;
 
     }
-}
-
-int main(){
-    Node* head = NULL;
-    // Agregar nodo al inicio
-    insertBeginnig(5, &head);
-    insertBeginnig(6, &head);
-    insertBeginnig(7, &head);
-     // Agregar nodo al final
-    insertEnd(7, &head);
-    insertEnd(78, &head);
-
-    // Prueba de funcionamiento
-    printf("Lista original:\n");
-    printList(head);
-
-    // Agregar nodo en posicion especifica
-    insertPosition(9, 2, &head);
-    printf("Despues de insertar 9 en la posición 2:\n");
-    printList(head);
-
-    // Eliminar un nodo
-    deleteNode(7, &head);
-    printf("Despues de eliminar el nodo 7:\n");
-    printList(head);
-
-    // Buscar nodo
-    int searchVal = 7;
-    Node* searchRes = searchNode(searchVal, head);
-    if (searchRes != NULL) {
-        printf("Nodo con valor %d encontrado.\n", searchVal);
-    } else {
-        printf("Nodo con valor %d no encontrado.\n", searchVal);
-    }
-    
-    // Imprime lista hacia adelante
-    printf("Recorriendo la lista hacia adelante:\n");
-    printList(head);
-
-    // Imprime lista hacia atrás
-    printf("Recorriendo la lista hacia atras:\n");
-    printListBack(head);
-
-    //free
-    freeList(head);
-
 }
