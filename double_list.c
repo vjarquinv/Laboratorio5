@@ -27,6 +27,7 @@ void insertBeginnig(int data, Node** cabeza){
     newNode->next = NULL;
     newNode->prev = NULL;
 
+    // Si la lista esta vacia, el nuevo nodo sera la cabeza
     if (*cabeza != NULL) {
         (*cabeza)->prev = newNode;
         newNode->next = *cabeza;
@@ -34,6 +35,39 @@ void insertBeginnig(int data, Node** cabeza){
 
     *cabeza = newNode;
 }
+
+void insertEnd(int data, Node** cabeza) {
+    // Reservar en memoria para el nuevo nodo
+    Node* newNode = (Node* )malloc(sizeof(Node));
+    // Revisa si malloc no fallo
+    if (newNode == NULL) {
+        printf("Fallo reservando memoria\n");
+        return;
+    }
+
+    newNode->data = data;
+    newNode->next = NULL;      
+    newNode->prev = NULL;
+
+    // Si la lista esta vacia, el nuevo nodo sera la cabeza
+    if (*cabeza == NULL) {
+        *cabeza = newNode;
+        return;
+    }
+
+    // De lo contrario, recorre la lista hasta el final
+    Node* temp = *cabeza;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    // Actualiza los punteros para insertar el nuevo nodo al final
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+
+
+
 
 // Funcion para recorrer los datos de la lista
 void printList(Node* head) {
@@ -62,8 +96,10 @@ int main(){
     // Agregar nodo al inicio
     insertBeginnig(5, &head);
     insertBeginnig(6, &head);
+    insertEnd(7, &head);
+    insertEnd(78, &head);
     // Prueba de funcionamiento
-    printf("Prueba nodo al inicio:\n");
+    printf("Prueba nodo al inicio y  final:\n");
     printList(head);
     //free
     freeList(head);
