@@ -18,22 +18,22 @@ int main(){
 
     // Agregar nodo en posicion especifica
     insertPosition(5, 2, &head);
-    printf("Despues de insertar el valor 5 en la posición 2:\n");
+    printf("Prueba insertar el valor 5 en la posición 2:\n");
     printList(head);
 
     // Caso donde se elimina el primer nodo
     deleteNode(7, &head);
-    printf("Despues de eliminar el nodo 7:\n");
+    printf("Despues de eliminar el nodo con valor 7:\n");
     printList(head);
 
     // Caso que se elimina un nodo con un valor repetido
     deleteNode(5, &head);
-    printf("Despues de eliminar el nodo 5:\n");
+    printf("Despues de eliminar el nodo con valor 5, que se encuentra repetido:\n");
     printList(head);
 
     // Caso donde se elimina el ultimo nodo
     deleteNode(4, &head);
-    printf("Despues de eliminar el nodo 4:\n");
+    printf("Prueba de eliminar el ultimo nodo 4:\n");
     printList(head);
 
     // Se agregan mas nodos al final de la lista
