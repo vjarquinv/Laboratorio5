@@ -130,6 +130,19 @@ void deleteNode(int data, Node** cabeza){
     printf("Nodo %d eliminado. \n", data);
 }
 
+// Funcion para encontrar un nodo en la lista
+Node* searchNode(int  data, Node* cabeza){
+    Node* temp = cabeza;
+
+    while (temp != NULL){
+        if(temp->data == data){
+            return temp;
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
 // Funcion para recorrer los datos de la lista
 void printList(Node* head) {
     Node* temp = head;
@@ -175,6 +188,15 @@ int main(){
     deleteNode(7, &head);
     printf("Despues de eliminar el nodo 7:\n");
     printList(head);
+
+    // Buscar nodo
+    int searchVal = 7;
+    Node* searchRes = searchNode(searchVal, head);
+    if (searchRes != NULL) {
+        printf("Nodo con valor %d encontrado.\n", searchVal);
+    } else {
+        printf("Nodo con valor %d no encontrado.\n", searchVal);
+    }
 
     //free
     freeList(head);
