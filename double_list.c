@@ -143,12 +143,27 @@ Node* searchNode(int  data, Node* cabeza){
     return NULL;
 }
 
-// Funcion para recorrer los datos de la lista
+// Funcion para recorrer los datos de la lista (Este recorre la lista hacia adelante)
 void printList(Node* head) {
     Node* temp = head;
     while (temp != NULL) {
         printf("%d ", temp->data);
         temp = temp->next;
+    }
+    printf("\n");
+}
+
+void printListBack(Node* head) {
+    Node* temp = head;
+
+    // Para recorrer al ultimo nodo
+    while (temp != NULL && temp->next != NULL) {
+        temp = temp->next;
+    }
+    // Recorre hacia atras del ultimo nodo
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->prev;
     }
     printf("\n");
 }
@@ -197,6 +212,14 @@ int main(){
     } else {
         printf("Nodo con valor %d no encontrado.\n", searchVal);
     }
+    
+    // Imprime lista hacia adelante
+    printf("Recorriendo la lista hacia adelante:\n");
+    printList(head);
+
+    // Imprime lista hacia atrás
+    printf("Recorriendo la lista hacia atras:\n");
+    printListBack(head);
 
     //free
     freeList(head);
