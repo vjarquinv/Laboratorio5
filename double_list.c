@@ -100,7 +100,35 @@ void insertPosition(int data, int position, Node** cabeza){
     temp->next = newNode;
 }
 
+void deleteNode(int data, Node** cabeza){
+    Node* temp = *cabeza;
 
+    // Si la lista esta vacia
+    if(temp == NULL){
+        printf("La lista esta vacia\n");
+        return;
+    }
+    // Recorre la lista para buscar el nodo que se quiere eliminar
+    while(temp != NULL && temp->data != data){
+        temp = temp->next;
+    }
+    // En caso que no encuentre el nodo
+    if(temp == *cabeza){
+        *cabeza = temp->next;
+    }
+    // Actualiza los punteros del nodo anterior
+    if(temp->prev != NULL){
+        temp->prev->next = temp->next;
+    }
+    // Actualiza los punteros del nodo siguiente
+    if(temp->next != NULL){
+        temp->next->prev = temp->prev;
+    }
+
+    // Se libera el nodo
+    free(temp);
+    printf("Nodo %d eliminado. \n", data);
+}
 
 // Funcion para recorrer los datos de la lista
 void printList(Node* head) {
@@ -129,6 +157,7 @@ int main(){
     // Agregar nodo al inicio
     insertBeginnig(5, &head);
     insertBeginnig(6, &head);
+    insertBeginnig(7, &head);
      // Agregar nodo al final
     insertEnd(7, &head);
     insertEnd(78, &head);
@@ -140,6 +169,11 @@ int main(){
     // Agregar nodo en posicion especifica
     insertPosition(9, 2, &head);
     printf("Despues de insertar 9 en la posición 2:\n");
+    printList(head);
+
+    // Eliminar un nodo
+    deleteNode(7, &head);
+    printf("Despues de eliminar el nodo 7:\n");
     printList(head);
 
     //free
