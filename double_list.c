@@ -20,7 +20,6 @@ Node* crearNode(int data){
         printf("Fallo reservando memoria\n");
         return NULL;
     }
-
     newNode->data = data;
     // Como no existen se inicializan en NULL
     newNode->next = NULL;
@@ -36,40 +35,70 @@ void insertBeginnig(int data, Node** cabeza){
     if (newNode == NULL) {
         return;
     }
-
     // Si la lista esta vacia, el nuevo nodo sera la cabeza
     if (*cabeza != NULL) {
         (*cabeza)->prev = newNode;
         newNode->next = *cabeza;
     }
-
     *cabeza = newNode;
 }
 
+// Funcion para insertar nodo al final
 void insertEnd(int data, Node** cabeza) {
     
     Node* newNode = crearNode(data);
     if (newNode == NULL) {
         return;
     }
-
     // Si la lista esta vacia, el nuevo nodo sera la cabeza
     if (*cabeza == NULL) {
         *cabeza = newNode;
         return;
     }
-
     // De lo contrario, recorre la lista hasta el final
     Node* temp = *cabeza;
     while (temp->next != NULL) {
         temp = temp->next;
     }
-
     // Actualiza los punteros para insertar el nuevo nodo al final
     temp->next = newNode;
     newNode->prev = temp;
 }
 
+// Funcion para insertar nodo en una posicion especifica
+void insertPosition(int data, int position, Node** cabeza){
+
+    // Si la posicion es 0, agregar al inicio
+    if(position == 0){
+        insertBeginnig(data, cabeza);
+        return;
+    }
+
+    Node* newNode = crearNode(data);
+    if (newNode == NULL) {
+        return;
+    }
+
+    Node* temp = *cabeza;
+    for (int i = 0; temp != NULL && i < position - 1; i++) {
+        temp = temp->next;
+    }
+
+    // Si la posicion es mayor que la longitud de la lista, agregar al final
+    if (temp == NULL || temp->next == NULL) {
+        insertEnd(data, cabeza);
+        return;
+    }
+
+    // Actualiza los punteros para insertar el nuevo nodo en la posicion deseada
+    newNode->next = temp->next;
+    newNode->prev = temp;
+    
+    if (temp->next != NULL) {
+        temp->next->prev = newNode;
+    }
+    temp->next = newNode;
+}
 
 
 
@@ -100,11 +129,19 @@ int main(){
     // Agregar nodo al inicio
     insertBeginnig(5, &head);
     insertBeginnig(6, &head);
+     // Agregar nodo al final
     insertEnd(7, &head);
     insertEnd(78, &head);
+
     // Prueba de funcionamiento
-    printf("Prueba nodo al inicio y  final:\n");
+    printf("Lista original:\n");
     printList(head);
+
+    // Agregar nodo en posicion especifica
+    insertPosition(9, 2, &head);
+    printf("Despues de insertar 9 en la posición 2:\n");
+    printList(head);
+
     //free
     freeList(head);
 
