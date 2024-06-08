@@ -17,33 +17,43 @@ int main(){
     printList(head);
 
     // Agregar nodo en posicion especifica
-    insertPosition(5, 2, &head);
-    printf("Prueba insertar el valor 5 en la posición 2:\n");
+    insertPosition(5, 1, &head);
+    printf("Prueba insertar el valor 5 en la posición 1:\n");
+    printList(head);
+
+    // Agregar nodo en posicion 0 es decir en la cabeza
+    insertPosition(8, 0, &head);
+    printf("Prueba insertar el valor 8 en la posición 0:\n");
+    printList(head);
+
+    // Agregar nodo en posicion mayor longitud lista
+    insertPosition(3, 7, &head);
+    printf("Prueba insertar el valor 3 en la posición 7 (ultimo nodo si la posicion es mayor a la longitud de la lista):\n");
     printList(head);
 
     // Caso donde se elimina el primer nodo
-    deleteNode(7, &head);
-    printf("Despues de eliminar el nodo con valor 7:\n");
+    deleteNode(8, &head);
+    printf("Despues de eliminar el nodo con valor 8 (primer nodo de la lista):\n");
     printList(head);
 
     // Caso que se elimina un nodo con un valor repetido
     deleteNode(5, &head);
-    printf("Despues de eliminar el nodo con valor 5, que se encuentra repetido:\n");
+    printf("Despues de eliminar el nodo con valor 5, que se encuentra repetido (elimina primero que aparece):\n");
     printList(head);
 
     // Caso donde se elimina el ultimo nodo
-    deleteNode(4, &head);
-    printf("Prueba de eliminar el ultimo nodo 4:\n");
+    deleteNode(3, &head);
+    printf("Prueba de eliminar el ultimo nodo 3:\n");
     printList(head);
 
     // Se agregan mas nodos al final de la lista
-    insertEnd(4, &head);
     insertEnd(3, &head);
+    insertEnd(2, &head);
     printf("Se insertaron mas nodos para el resto de pruebas:\n");
     printList(head);
 
     // Buscar nodo que no esta en la lista
-    int searchVal = 7;
+    int searchVal = 8;
     searchNode(searchVal, head);
     // Buscar nodo que se encuentra en la lista
     int searchVal2 = 4;
