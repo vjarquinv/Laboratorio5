@@ -67,10 +67,6 @@ void insertPosition(int data, int position, Node** cabeza){
         return;
     }
 
-    Node* newNode = crearNode(data);
-    if (newNode == NULL) {
-        return;
-    }
 
     Node* temp = *cabeza;
     for (int i = 0; temp != NULL && i < position - 1; i++) {
@@ -80,6 +76,11 @@ void insertPosition(int data, int position, Node** cabeza){
     // Si la posicion es mayor que la longitud de la lista, agregar al final
     if (temp == NULL || temp->next == NULL) {
         insertEnd(data, cabeza);
+        return;
+    }
+
+    Node* newNode = crearNode(data);
+    if (newNode == NULL) {
         return;
     }
 
